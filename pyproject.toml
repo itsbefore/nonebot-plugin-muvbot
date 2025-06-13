@@ -1,0 +1,16 @@
+[project]
+name = "nonebot-plugin-mmuvbot"
+version = "0.1.0"
+description = "muvmuv bot for milklove"
+readme = "README.md"
+requires-python = ">=3.9, <4.0"
+license = {text = "MIT"}
+
+[tool.nonebot]
+adapters = [
+    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
+    {name = "Console", module_name = "nonebot.adapters.console"}
+]
+plugins = ["nonebot_plugin_alias"]
+plugin_dirs = ["nonebot_plugin_muvbot/"]
+builtin_plugins = ["echo"]
