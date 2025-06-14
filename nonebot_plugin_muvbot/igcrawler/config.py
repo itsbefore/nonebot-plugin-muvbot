@@ -1,5 +1,3 @@
-from pydantic import BaseModel
+allow_group = {"1014444681", "all"}
+instagram_cookie = {}
 
-
-class Config(BaseModel):
-    """Plugin Config Here"""
