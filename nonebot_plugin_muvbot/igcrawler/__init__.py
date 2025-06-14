@@ -5,7 +5,7 @@ from typing import List
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, Event, MessageSegment, Message
 from nonebot.plugin import PluginMetadata
-from .instacapture_m import InstaPost, InstaStory
+from instacapture import InstaStory, InstaPost
 import datetime
 from datetime import UTC
 from .config import instagram_cookie,allow_group
@@ -102,10 +102,12 @@ def InsDownPost(url):
 
     postjson = './post/'+post_obj.username+'/'+post_obj.reel_id+'-main.json'
     print(postjson)
-
-    with open(postjson, "r", encoding="utf-8") as file:
-        data = json.load(file)
-
+    try:
+        with open(postjson, "r", encoding="utf-8") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        print("文件不存在")
+        return None,None
     # 提取用户名
     username = data["owner"]["username"]
 
@@ -193,7 +195,11 @@ async def handle_ins(event: Event, bot: Bot):
     if ins_post_pattern.search(message):
         # 下载内容
         desc, media_files = InsDownPost(message)
-
+        
+        if desc is None:
+            await igdownload.finish("未找到帖子")
+            return
+        
         # 回复描述信息
         await igdownload.send(desc)
         # await asyncio.sleep(1)
