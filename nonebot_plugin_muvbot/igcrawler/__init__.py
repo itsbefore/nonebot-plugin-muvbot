@@ -180,7 +180,7 @@ def InsDownPost(url):
 
 
 # 注册消息监听器
-igdownload = on_message(priority=5, block=True)
+igdownload = on_message(priority=5, block=False)
 
 @igdownload.handle()
 async def handle_ins(event: Event, bot: Bot):

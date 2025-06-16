@@ -17,7 +17,7 @@ replies = {
 from nonebot import on_message
 from nonebot.adapters import Event
 
-mlgm = on_message(priority=5, block=True)
+mlgm = on_message(priority=10, block=False)
 
 @mlgm.handle()
 async def handle_function(event: Event):
